@@ -31,8 +31,8 @@ public class OrderController {
     }
 
     @PutMapping("/orders/{id}")
-    public OrderResponseDto updateOrderStatusById(@PathVariable UUID id, @RequestBody OrderRequestDto orderRequestDto) {
-        return orderService.updateOrderStatusById(id, orderRequestDto);
+    public OrderResponseDto updateOrderStatus(@PathVariable UUID id, @RequestBody OrderRequestDto orderRequestDto) {
+        return orderService.updateOrderStatus(id, orderRequestDto);
     }
 
     @DeleteMapping("/orders/{id}")

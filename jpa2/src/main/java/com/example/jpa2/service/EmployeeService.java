@@ -4,34 +4,31 @@ import com.example.jpa2.EmployeeSpecification;
 import com.example.jpa2.dto.EmployeeRequestDto;
 import com.example.jpa2.dto.EmployeeResponseDto;
 import com.example.jpa2.entity.EmployeeEntity;
-import com.example.jpa2.entity.Roles;
 import com.example.jpa2.exception.EmployeeAlreadyExistsException;
 import com.example.jpa2.exception.EmployeeNotFoundException;
 import com.example.jpa2.exception.InvalidPasswordException;
 import com.example.jpa2.mapper.EmployeeMapper;
+import com.example.jpa2.mapper.EmployeeMapper1;
 import com.example.jpa2.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.List;
+
 import java.util.Optional;
 import java.util.UUID;
 
-import static com.example.jpa2.mapper.EmployeeMapper.mapToEntity;
-import static com.example.jpa2.mapper.EmployeeMapper.mapToResponse;
 
 @Service
 @RequiredArgsConstructor
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
+    private final EmployeeMapper1 employeeMapper;
 
     public EmployeeResponseDto addEmployee(EmployeeRequestDto dto) {
-        EmployeeEntity employee = mapToEntity(dto);
+        EmployeeEntity employee = employeeMapper.toEntity(dto);
         if (employeeRepository.existsByEmail(dto.getEmail())) {
             throw new EmployeeAlreadyExistsException("Сотрудник с таким email уже существует");
         }
@@ -40,7 +37,7 @@ public class EmployeeService {
 
         }
         EmployeeEntity entity = employeeRepository.save(employee);
-        return mapToResponse(entity);
+        return employeeMapper.toDto(entity);
     }
 
     public Page<EmployeeResponseDto> getAllEmployees(String name, String surname, String email, Pageable pageable) {
@@ -52,7 +49,7 @@ public class EmployeeService {
                 EmployeeSpecification.containsEmail(email)
         );
         return employeeRepository.findAll(spec, pageable)
-                .map(EmployeeMapper::mapToResponse);
+                .map(employeeMapper::toDto);
     }
 
     public EmployeeResponseDto updateEmployee( UUID id,  EmployeeRequestDto dto) {
@@ -63,7 +60,7 @@ public class EmployeeService {
         employee.setEmail(dto.getEmail());
         employee.setPassword(dto.getPassword());
         employee.setRole(dto.getRole());
-        return mapToResponse(employeeRepository.save(employee));
+        return employeeMapper.toDto(employeeRepository.save(employee));
     }
 
     public void deleteEmployee( UUID id){
@@ -78,6 +75,6 @@ public class EmployeeService {
         if (employeeOptional.isEmpty()){
             throw new EmployeeNotFoundException("Сотрудник с таким id не найден");
         }
-        return mapToResponse(employeeOptional.get());
+        return employeeMapper.toDto(employeeOptional.get());
     }
 }

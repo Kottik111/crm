@@ -18,6 +18,8 @@ import java.util.UUID;
 public class ClientController {
     private final ClientService clientService;
 
+
+
     @PostMapping("/clients")
     public ClientResponseDto addClient(@RequestBody ClientRequestDto dto){
         return clientService.addClient(dto);

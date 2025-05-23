@@ -28,7 +28,7 @@ public class ClientEntity {
     private String email;
     @Column(name = "phonenumber")
     private String phoneNumber;//phone_number
-    @OneToMany(mappedBy = "clientEntity")
+    @OneToMany(mappedBy = "clientEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderEntity> orders = new ArrayList<>();
 
 }

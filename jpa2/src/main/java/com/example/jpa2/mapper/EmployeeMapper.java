@@ -5,7 +5,7 @@ import com.example.jpa2.dto.EmployeeResponseDto;
 import com.example.jpa2.entity.EmployeeEntity;
 
 public class EmployeeMapper {
-    public static EmployeeResponseDto mapToResponse(EmployeeEntity entity){
+    public  EmployeeResponseDto toDto(EmployeeEntity entity){
         EmployeeResponseDto dto = new EmployeeResponseDto();
         dto.setId(entity.getId());
         dto.setName(entity.getName());
@@ -16,7 +16,7 @@ public class EmployeeMapper {
         return dto;
     }
 
-    public static EmployeeEntity mapToEntity(EmployeeRequestDto dto){
+    public  EmployeeEntity toEntity(EmployeeRequestDto dto){
         EmployeeEntity entity = new EmployeeEntity();
         entity.setName(dto.getName());
         entity.setSurname(dto.getSurname());

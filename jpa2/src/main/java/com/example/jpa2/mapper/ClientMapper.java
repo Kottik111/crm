@@ -5,7 +5,7 @@ import com.example.jpa2.dto.ClientResponseDto;
 import com.example.jpa2.entity.ClientEntity;
 
 public class ClientMapper {
-    public static ClientEntity mapToEntity(ClientRequestDto requestDto) {
+    public  ClientEntity toEntity(ClientRequestDto requestDto) {
         ClientEntity entity = new ClientEntity();
         entity.setName(requestDto.getName());
         entity.setSurname(requestDto.getSurname());
@@ -14,7 +14,7 @@ public class ClientMapper {
         return entity;
     }
 
-    public static ClientResponseDto mapToResponse(ClientEntity entity) {
+    public  ClientResponseDto toDto(ClientEntity entity) {
         ClientResponseDto dto = new ClientResponseDto();
         dto.setId(entity.getId());
         dto.setName(entity.getName());

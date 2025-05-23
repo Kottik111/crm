@@ -6,7 +6,7 @@ import com.example.jpa2.entity.ProductEntity;
 
 public class ProductMapper {
 
-    public static ProductEntity mapToEntity(ProductRequestDto productRequestDto) {
+    public  ProductEntity toEntity(ProductRequestDto productRequestDto) {
         ProductEntity productEntity = new ProductEntity();
         productEntity.setName(productRequestDto.getName());
         productEntity.setDescription(productRequestDto.getDescription());
@@ -14,7 +14,7 @@ public class ProductMapper {
         return productEntity;
     }
 
-    public static ProductResponseDto mapToDto(ProductEntity productEntity) {
+    public  ProductResponseDto toDto(ProductEntity productEntity) {
         ProductResponseDto productResponseDto = new ProductResponseDto();
         productResponseDto.setId(productEntity.getId());
         productResponseDto.setName(productEntity.getName());

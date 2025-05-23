@@ -3,6 +3,8 @@ package com.example.jpa2.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -34,6 +36,7 @@ public class OrderEntity {
             name = "order_product",
             joinColumns = @JoinColumn(name = "order_id")
     )
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @MapKeyJoinColumn(name = "product_id")
     @Column(name = "quantity")
     private Map<ProductEntity, Integer> products = new HashMap<>();

@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 public class OrderMapper {
-    public static OrderEntity mapToEntity(OrderRequestDto orderRequestDto, ClientEntity clientEntity) {
+    public  OrderEntity toEntity(OrderRequestDto orderRequestDto, ClientEntity clientEntity) {
         OrderEntity orderEntity = new OrderEntity();
         orderEntity.setStatus(orderRequestDto.getStatus());
         orderEntity.setDate(LocalDate.now());
@@ -21,7 +21,7 @@ public class OrderMapper {
         return orderEntity;
     }
 
-    public static OrderResponseDto mapToDto(OrderEntity orderEntity) {
+    public  OrderResponseDto toDto(OrderEntity orderEntity) {
         OrderResponseDto orderResponseDto = new OrderResponseDto();
         orderResponseDto.setId(orderEntity.getId());
         orderResponseDto.setStatus(orderEntity.getStatus());

@@ -12,6 +12,7 @@ import com.example.jpa2.exception.ClientNotFoundException;
 import com.example.jpa2.exception.OrderNotFoundException;
 import com.example.jpa2.exception.ProductNotFoundException;
 import com.example.jpa2.mapper.OrderMapper;
+import com.example.jpa2.mapper.OrderMapper1;
 import com.example.jpa2.repository.ClientRepository;
 import com.example.jpa2.repository.OrderRepository;
 import com.example.jpa2.repository.ProductRepository;
@@ -24,8 +25,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.*;
 
-import static com.example.jpa2.mapper.OrderMapper.mapToDto;
-import static com.example.jpa2.mapper.OrderMapper.mapToEntity;
+
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +33,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final ClientRepository clientRepository;
     private final ProductRepository productRepository;
+    private final OrderMapper orderMapper = new OrderMapper();
 
     public OrderResponseDto addOrder(OrderRequestDto orderRequestDto) {
         Optional<ClientEntity> clientOptional = clientRepository.findById(orderRequestDto.getClientId());
@@ -40,19 +41,26 @@ public class OrderService {
             throw new ClientNotFoundException("Client not found");
         }
 
-        OrderEntity orderEntity = mapToEntity(orderRequestDto, clientOptional.get());
+        OrderEntity orderEntity = orderMapper.toEntity(orderRequestDto, clientOptional.get());
         orderRepository.save(orderEntity);
-        return mapToDto(orderEntity);
+        return orderMapper.toDto(orderEntity);
     }
 
-    public OrderResponseDto updateOrderStatusById(UUID id, OrderRequestDto orderRequestDto) {
-        Optional<ClientEntity> clientOptional = clientRepository.findById(id);
+    public OrderResponseDto updateOrderStatus(UUID id, OrderRequestDto orderRequestDto) {
+        Optional<OrderEntity> orderEntityOptional = orderRepository.findById(id);
+        if (orderEntityOptional.isEmpty()){
+            throw new OrderNotFoundException("Order not found");
+        }
+        Optional<ClientEntity> clientOptional = clientRepository.findById(orderRequestDto.getClientId());
         if (clientOptional.isEmpty()){
             throw new ClientNotFoundException("Client not found");
         }
-        OrderEntity orderEntity = mapToEntity(orderRequestDto, clientOptional.get());
-        orderEntity.setStatus(orderRequestDto.getStatus());
-        return mapToDto(orderRepository.save(orderEntity));
+        orderEntityOptional.get().setId(id);
+        orderEntityOptional.get().setDate(LocalDate.now());
+        orderEntityOptional.get().setStatus(orderRequestDto.getStatus());
+        orderEntityOptional.get().setClientEntity(clientOptional.get());
+
+        return orderMapper.toDto(orderRepository.save(orderEntityOptional.get()));
     }
 
     public void deleteOrderById(UUID id) {
@@ -72,7 +80,7 @@ public class OrderService {
         );
 
         return orderRepository.findAll(spec, pageable)
-                .map(OrderMapper::mapToDto);
+                .map(orderMapper::toDto);
     }
 
     public OrderResponseDto addProductInOrder(UUID orderId, UUID productId,  int quantity) {
@@ -90,7 +98,7 @@ public class OrderService {
         orderEntity.get().getProducts().merge(productEntity.get(), quantity, Integer::sum);
 
         orderRepository.save(orderEntity.get());
-        return mapToDto(orderEntity.get());
+        return orderMapper.toDto(orderEntity.get());
     }
 
     public OrderResponseDto updateProductQuantityInOrder(UUID orderId, UUID productId, int quantity) {
@@ -111,7 +119,7 @@ public class OrderService {
         }
 
         orderRepository.save(order);
-        return mapToDto(order);
+        return orderMapper.toDto(order);
     }
 
     public List<OrderProductResponseDto> getOrderProducts(UUID orderId) {
