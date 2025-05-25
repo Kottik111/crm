@@ -15,5 +15,5 @@ public class OrderResponseDto {
     private Status status;
     private LocalDate date;
     private String clientInfo;
-    private List<ProductWithQuantity> product;
+    private List<ProductWithQuantity> products;
 }

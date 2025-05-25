@@ -24,7 +24,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ClientService {
     private final ClientRepository clientRepository;
-    private final ClientMapper clientMapper = new ClientMapper();
+    private final ClientMapper1 clientMapper;
 
     public ClientResponseDto addClient(ClientRequestDto dto){
         ClientEntity client= clientMapper.toEntity(dto);

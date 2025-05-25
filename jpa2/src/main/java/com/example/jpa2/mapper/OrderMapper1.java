@@ -3,6 +3,7 @@ package com.example.jpa2.mapper;
 import com.example.jpa2.dto.OrderRequestDto;
 import com.example.jpa2.dto.OrderResponseDto;
 import com.example.jpa2.dto.ProductWithQuantity;
+import com.example.jpa2.entity.ClientEntity;
 import com.example.jpa2.entity.OrderEntity;
 import com.example.jpa2.entity.ProductEntity;
 import org.mapstruct.Mapper;
@@ -13,9 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-//@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring")
 public interface OrderMapper1 {
-    OrderEntity toEntity(OrderRequestDto orderRequestDto);
+    @Mapping(target = "clientEntity", source = "clientEntity")
+    OrderEntity toEntity(OrderRequestDto orderRequestDto, ClientEntity clientEntity);
     @Mapping(source = "products", target = "products", qualifiedByName = "mapToProductWithQuantity")
     OrderResponseDto toDto(OrderEntity orderEntity);
 

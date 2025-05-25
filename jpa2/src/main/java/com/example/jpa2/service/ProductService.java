@@ -24,7 +24,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ProductService {
     private final ProductRepository productRepository;
-    private final ProductMapper productMapper1 = new ProductMapper();
+    private final ProductMapper1 productMapper1;
 
     public ProductResponseDto addProduct(ProductRequestDto productRequestDto) {
         ProductEntity productEntity = productMapper1.toEntity(productRequestDto);

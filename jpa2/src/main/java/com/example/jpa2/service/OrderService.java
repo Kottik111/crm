@@ -33,7 +33,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final ClientRepository clientRepository;
     private final ProductRepository productRepository;
-    private final OrderMapper orderMapper = new OrderMapper();
+    private final OrderMapper1 orderMapper;
 
     public OrderResponseDto addOrder(OrderRequestDto orderRequestDto) {
         Optional<ClientEntity> clientOptional = clientRepository.findById(orderRequestDto.getClientId());

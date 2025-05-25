@@ -39,7 +39,7 @@ public class OrderMapper {
             productWithQuantity.setQuantity(quantity);
             newProduct.add(productWithQuantity);
         }
-        orderResponseDto.setProduct(newProduct);
+        orderResponseDto.setProducts(newProduct);
         return orderResponseDto;
     }
 }
