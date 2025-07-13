@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+  app:
+    build: .
+    container_name: my-spring-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/homework
+      SPRING_DATASOURCE_USERNAME: student
+      SPRING_DATASOURCE_PASSWORD: p@ss123
+
+  db:
+    image: postgres:16
+    container_name: school-db
+    environment:
+      POSTGRES_USER: student
+      POSTGRES_PASSWORD: p@ss123
+      POSTGRES_DB: homework
+    ports:
+      - "5433:5432"
+
+
