@@ -1,12 +1,11 @@
 package com.example.jpa2.service;
 
-import com.example.jpa2.ProductSpecification;
+import com.example.jpa2.specification.ProductSpecification;
 import com.example.jpa2.dto.ProductRequestDto;
 import com.example.jpa2.dto.ProductResponseDto;
 import com.example.jpa2.entity.ProductEntity;
 import com.example.jpa2.exception.ProductNotFoundException;
-import com.example.jpa2.mapper.ProductMapper;
-import com.example.jpa2.mapper.ProductMapper1;
+import com.example.jpa2.mapperInterf.ProductMapper1;
 import com.example.jpa2.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

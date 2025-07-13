@@ -1,18 +1,16 @@
 package com.example.jpa2.service;
 
-import com.example.jpa2.OrderSpecification;
+import com.example.jpa2.specification.OrderSpecification;
 import com.example.jpa2.dto.OrderProductResponseDto;
 import com.example.jpa2.dto.OrderRequestDto;
 import com.example.jpa2.dto.OrderResponseDto;
-import com.example.jpa2.dto.ProductRequestDto;
 import com.example.jpa2.entity.ClientEntity;
 import com.example.jpa2.entity.OrderEntity;
 import com.example.jpa2.entity.ProductEntity;
 import com.example.jpa2.exception.ClientNotFoundException;
 import com.example.jpa2.exception.OrderNotFoundException;
 import com.example.jpa2.exception.ProductNotFoundException;
-import com.example.jpa2.mapper.OrderMapper;
-import com.example.jpa2.mapper.OrderMapper1;
+import com.example.jpa2.mapperInterf.OrderMapper1;
 import com.example.jpa2.repository.ClientRepository;
 import com.example.jpa2.repository.OrderRepository;
 import com.example.jpa2.repository.ProductRepository;

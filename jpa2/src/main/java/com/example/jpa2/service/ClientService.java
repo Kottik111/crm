@@ -1,13 +1,12 @@
 package com.example.jpa2.service;
 
-import com.example.jpa2.ClientSpecification;
+import com.example.jpa2.specification.ClientSpecification;
 import com.example.jpa2.dto.ClientRequestDto;
 import com.example.jpa2.dto.ClientResponseDto;
 import com.example.jpa2.entity.ClientEntity;
 import com.example.jpa2.exception.ClientAlreadyExistsException;
 import com.example.jpa2.exception.ClientNotFoundException;
-import com.example.jpa2.mapper.ClientMapper;
-import com.example.jpa2.mapper.ClientMapper1;
+import com.example.jpa2.mapperInterf.ClientMapper1;
 import com.example.jpa2.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

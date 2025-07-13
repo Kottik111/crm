@@ -1,9 +1,6 @@
 package com.example.jpa2.mapper;
 
-import com.example.jpa2.dto.EmployeeRequestDto;
-import com.example.jpa2.dto.EmployeeResponseDto;
-import com.example.jpa2.entity.EmployeeEntity;
-
+/*
 public class EmployeeMapper {
     public  EmployeeResponseDto toDto(EmployeeEntity entity){
         EmployeeResponseDto dto = new EmployeeResponseDto();
@@ -26,3 +23,5 @@ public class EmployeeMapper {
         return entity;
     }
 }
+
+ */

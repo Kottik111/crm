@@ -1,4 +1,4 @@
-package com.example.jpa2;
+package com.example.jpa2.specification;
 
 import com.example.jpa2.entity.ProductEntity;
 import org.springframework.data.jpa.domain.Specification;

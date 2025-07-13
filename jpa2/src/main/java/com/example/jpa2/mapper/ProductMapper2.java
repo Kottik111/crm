@@ -1,9 +1,6 @@
 package com.example.jpa2.mapper;
 
-import com.example.jpa2.dto.ProductRequestDto;
-import com.example.jpa2.dto.ProductResponseDto;
-import com.example.jpa2.entity.ProductEntity;
-
+/*
 public class ProductMapper {
 
     public  ProductEntity toEntity(ProductRequestDto productRequestDto) {
@@ -23,3 +20,5 @@ public class ProductMapper {
         return productResponseDto;
     }
 }
+
+ */

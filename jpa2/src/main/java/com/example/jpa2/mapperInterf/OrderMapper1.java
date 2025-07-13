@@ -1,4 +1,4 @@
-package com.example.jpa2.mapper;
+package com.example.jpa2.mapperInterf;
 
 import com.example.jpa2.dto.OrderRequestDto;
 import com.example.jpa2.dto.OrderResponseDto;

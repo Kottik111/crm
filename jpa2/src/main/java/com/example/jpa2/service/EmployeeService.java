@@ -1,14 +1,13 @@
 package com.example.jpa2.service;
 
-import com.example.jpa2.EmployeeSpecification;
+import com.example.jpa2.specification.EmployeeSpecification;
 import com.example.jpa2.dto.EmployeeRequestDto;
 import com.example.jpa2.dto.EmployeeResponseDto;
 import com.example.jpa2.entity.EmployeeEntity;
 import com.example.jpa2.exception.EmployeeAlreadyExistsException;
 import com.example.jpa2.exception.EmployeeNotFoundException;
 import com.example.jpa2.exception.InvalidPasswordException;
-import com.example.jpa2.mapper.EmployeeMapper;
-import com.example.jpa2.mapper.EmployeeMapper1;
+import com.example.jpa2.mapperInterf.EmployeeMapper1;
 import com.example.jpa2.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -34,7 +33,6 @@ public class EmployeeService {
         }
         if (dto.getPassword().length() < 6) {
             throw new InvalidPasswordException("Пароль должен содержать минимум 6 символов");
-
         }
         EmployeeEntity entity = employeeRepository.save(employee);
         return employeeMapper.toDto(entity);

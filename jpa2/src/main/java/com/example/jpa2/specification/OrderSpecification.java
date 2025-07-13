@@ -1,9 +1,7 @@
-package com.example.jpa2;
+package com.example.jpa2.specification;
 
 import com.example.jpa2.entity.OrderEntity;
-import com.example.jpa2.entity.ProductEntity;
 
-import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.Path;
 import org.springframework.data.jpa.domain.Specification;
 
