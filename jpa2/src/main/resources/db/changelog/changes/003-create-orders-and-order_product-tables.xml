@@ -1,0 +1,54 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.27.xsd">
+
+    <changeSet id="003" author="ekaterina">
+
+        <createTable tableName="orders">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="created_date" type="DATE"/>
+            <column name="status" type="VARCHAR(50)"/>
+            <column name="client_entity_id" type="UUID"/>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="orders"
+                baseColumnNames="client_entity_id"
+                referencedTableName="client"
+                referencedColumnNames="id"
+                constraintName="fk_orders_client"
+                onDelete="CASCADE"/>
+
+        <createTable tableName="order_product">
+            <column name="order_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quantity" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="order_product"
+                baseColumnNames="order_id"
+                referencedTableName="orders"
+                referencedColumnNames="id"
+                constraintName="fk_order_product_order"
+                onDelete="CASCADE"/>
+
+        <addForeignKeyConstraint
+                baseTableName="order_product"
+                baseColumnNames="product_id"
+                referencedTableName="product"
+                referencedColumnNames="id"
+                constraintName="fk_order_product_product"
+                onDelete="CASCADE"/>
+    </changeSet>
+</databaseChangeLog>
