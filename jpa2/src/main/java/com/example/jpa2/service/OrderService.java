@@ -40,6 +40,7 @@ public class OrderService {
         }
 
         OrderEntity orderEntity = orderMapper.toEntity(orderRequestDto, clientOptional.get());
+
         orderRepository.save(orderEntity);
         return orderMapper.toDto(orderEntity);
     }

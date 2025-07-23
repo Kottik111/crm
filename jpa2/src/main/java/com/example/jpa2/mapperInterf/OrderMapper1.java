@@ -16,9 +16,11 @@ import java.util.Map;
 
 @Mapper(componentModel = "spring")
 public interface OrderMapper1 {
+    @Mapping(target = "id", ignore = true)
     @Mapping(target = "clientEntity", source = "clientEntity")
     OrderEntity toEntity(OrderRequestDto orderRequestDto, ClientEntity clientEntity);
     @Mapping(source = "products", target = "products", qualifiedByName = "mapToProductWithQuantity")
+    @Mapping(target = "clientInfo", expression = "java(orderEntity.getClientEntity() != null ? orderEntity.getClientEntity().getName() + \" \" + orderEntity.getClientEntity().getSurname() : null)")
     OrderResponseDto toDto(OrderEntity orderEntity);
 
 
